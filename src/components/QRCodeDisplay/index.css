@@ -1,0 +1,15 @@
+.qr-container {
+  display: flex;
+  padding: 50px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.quetion {
+  font-size: 20px;
+}
+.heading {
+  font-size: 20px;
+  margin: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
