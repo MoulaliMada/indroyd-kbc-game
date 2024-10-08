@@ -1,0 +1,28 @@
+.bg-container {
+  padding: 20px;
+}
+.label {
+  font-size: 15px;
+}
+.input-name {
+  padding: 5px;
+}
+.ul-options {
+  list-style-type: none;
+  padding: 0px;
+}
+.submit-btn2 {
+  background-color: rgb(56, 56, 243);
+  color: white;
+  font-size: 14px;
+  border: none;
+  padding: 7px;
+  padding-left: 21px;
+  padding-right: 21px;
+  border-radius: 5px;
+  align-self: center;
+}
+.warning-name{
+    font-size: 13px;
+    color: red;
+}

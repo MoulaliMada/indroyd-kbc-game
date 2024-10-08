@@ -1,6 +1,6 @@
 import React from "react";
 
-function Result() {
+function Result({detailsOfUser}) {
   return (
     <div>
       <h1>Form Submitted Successfully!</h1>

@@ -17,10 +17,15 @@ function App() {
             element={<QRCodeDisplay questionNom={questionNom} />}
           />
           <Route
-            path="/form/:questionNom"
-            element={<Form setUserDetails={setUserDetails} />}
+            path="/form/"
+            element={
+              <Form setUserDetails={setUserDetails} questionNom={questionNom} />
+            }
           />
-          <Route path="/result" element={<Result />} />
+          <Route
+            path="/result"
+            element={<Result detailsOfUser={userDetails} />}
+          />
         </Routes>
       </div>
     </Router>

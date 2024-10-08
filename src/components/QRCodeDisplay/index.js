@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import './index.css'
+import "./index.css";
 
 function QRCodeDisplay({ questionNom }) {
-  const url = `${window.location.origin}/form/:questionNom`;
+  const url = `${window.location.origin}/form`;
   const questions = [
     {
       id: 1,
@@ -95,12 +95,21 @@ function QRCodeDisplay({ questionNom }) {
     },
   ];
 
-  const { question } = questions[questionNom - 1];
+  const { question, options } = questions[questionNom - 1];
   return (
     <div>
       <h1 className="heading">Scan this QR Code to get question</h1>
+
       <div className="qr-container">
-        <p className="quetion">{question}</p>
+        <div>
+          <p className="quetion">{question}</p>
+          <ul>
+            <li>{options[0]}</li>
+            <li>{options[1]}</li>
+            <li>{options[2]}</li>
+            <li>{options[3]}</li>
+          </ul>
+        </div>
         <QRCodeSVG value={url} size={200} />
       </div>
     </div>

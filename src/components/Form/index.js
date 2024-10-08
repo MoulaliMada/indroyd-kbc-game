@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate,useParams  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./index.css";
 
-function Form({ setUserDetails }) {
+function Form(props) {
+  const { setUserDetails, questionNom } = props;
   const questions = [
     {
       id: 1,
@@ -92,51 +94,81 @@ function Form({ setUserDetails }) {
       answer: "All of the above",
     },
   ];
-  const { questionNom } = useParams(); 
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
+  const [userName, setUserName] = useState("");
+  const currentQuestion = useState(questions[questionNom]);
+  const currentQuestion1 = currentQuestion[0];
+  const [useraAnswer, setUserAnswer] = useState("");
+  const [isUserNameEmpty, setisUserNameEmpty] = useState(false);
+  const [isUserAnsewerEmpty, setisUserAnsewerEmpty] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log(name);
-    setFormData({ ...formData, [name]: value });
-  };
-
+  const { question, options, answer } = currentQuestion1;
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserDetails(formData);
-    navigate("/result");
+    if (userName === "") {
+      setisUserNameEmpty(true);
+    } else {
+      setisUserNameEmpty(false);
+    }
+    if (useraAnswer === "") {
+      setisUserAnsewerEmpty(true);
+    } else {
+      setisUserAnsewerEmpty(false);
+    }
+    if (useraAnswer !== "" && userName !== "") {
+      const formData = { name: userName, userAnswer: answer };
+      setUserDetails(formData);
+      navigate("/result");
+    }
+  };
+
+  const changeName = (event) => {
+    setUserName(event.target.value);
+  };
+
+  const handleChangeOption = (event) => {
+    setUserAnswer(event.target.value);
   };
 
   return (
-    <div>
-      <h1>Fill in the Form</h1>
+    <div className="bg-container">
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+        <p className="label">Enter Yor Name</p>
+        <input
+          onChange={changeName}
+          placeholder="enter your name"
+          value={userName}
+          className="input-name"
+        />
+        {isUserNameEmpty && (
+          <p className="warning-name">*Please Enter Your Name</p>
+        )}
+
+        <div className="mcq-container">
+          <p className="question">{question}</p>
+          <hr />
+          <ul className="ul-options">
+            {options.map((eachOption) => (
+              <li key={eachOption} className="option">
+                <input
+                  id={eachOption}
+                  type="radio"
+                  value={eachOption}
+                  checked={useraAnswer === eachOption}
+                  onChange={handleChangeOption}
+                />
+                <label htmlFor={eachOption} className="label-option">
+                  {eachOption}
+                </label>
+              </li>
+            ))}
+          </ul>
+          {isUserAnsewerEmpty && (
+            <p className="warning-name">*Please Enter your answer</p>
+          )}
+          <button className="submit-btn2" type="submit">
+            SUBMIT
+          </button>
         </div>
-        <div>
-          <label>Email: </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
       </form>
     </div>
   );
