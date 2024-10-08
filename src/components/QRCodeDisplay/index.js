@@ -3,7 +3,7 @@ import { QRCodeSVG } from "qrcode.react";
 import "./index.css";
 
 function QRCodeDisplay({ questionNom }) {
-  const url = `${window.location.origin}/form`;
+  const url = `https://indroyd-kbc-game.vercel.app/form`;
   const questions = [
     {
       id: 1,
