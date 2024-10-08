@@ -7,6 +7,24 @@ import Result from "./components/Result";
 function App() {
   const [userDetails, setUserDetails] = useState(null);
   const [questionNom, setquestionNom] = useState(1);
+  const [isGameFinished, setGameFinished] = useState(false);
+
+  if (userDetails) {
+    const { userAnswer, correctAnswer } = userDetails;
+    if (userAnswer === correctAnswer) {
+      if (questionNom < 10) {
+        setTimeout(() => {
+          setquestionNom((prevCount) => prevCount + 1);
+          setUserDetails(null);
+        }, 5000);
+      } else {
+        setGameFinished(true);
+      }
+    } else {
+      setGameFinished(true);
+    }
+  }
+
   console.log(userDetails);
   return (
     <Router>
@@ -24,7 +42,12 @@ function App() {
           />
           <Route
             path="/result"
-            element={<Result detailsOfUser={userDetails} />}
+            element={
+              <Result
+                detailsOfUser={userDetails}
+                isGameFinished={isGameFinished}
+              />
+            }
           />
         </Routes>
       </div>

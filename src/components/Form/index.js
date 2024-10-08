@@ -95,7 +95,8 @@ function Form(props) {
     },
   ];
   const [userName, setUserName] = useState("");
-  const currentQuestion = useState(questions[questionNom]);
+  const nomber = questionNom - 1;
+  const currentQuestion = useState(questions[nomber]);
   const currentQuestion1 = currentQuestion[0];
   const [useraAnswer, setUserAnswer] = useState("");
   const [isUserNameEmpty, setisUserNameEmpty] = useState(false);
@@ -115,7 +116,11 @@ function Form(props) {
       setisUserAnsewerEmpty(false);
     }
     if (useraAnswer !== "" && userName !== "") {
-      const formData = { name: userName, userAnswer: answer };
+      const formData = {
+        name: userName,
+        userAnswer: useraAnswer,
+        correctAnswer: answer,
+      };
       setUserDetails(formData);
       navigate("/result");
     }
